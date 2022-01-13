@@ -28,15 +28,21 @@ with open(csvpath) as csvfile:
     greatest_increase = max(monthly_changes)
     greatest_decrease = min(monthly_changes)
 
+# Creating output file and writing information from election data analysis
+output_path = os.path.join("PyBank", "analysis", "analysis.txt")
 
-    print("Financial Analysis")
-    print("-------------------------------")
-    print ("Total Months: " + str(len(distinct_months)))
-    print ("Total: " + str(total))
-    print("Average Change: " + str(average_change))
+with open(output_path, 'w', newline='') as txtfile:
+
+    txtfile.write("Financial Analysis \n")
+    txtfile.write("------------------------------- \n")
+    txtfile.write("Total Months: " + str(len(distinct_months)) + "\n")
+    txtfile.write("Total: " + str(total) + "\n")
+    txtfile.write("Average Change: " + str(average_change) + "\n")
 
     for row in combinded_list:
         if greatest_increase in row:
-            print(f"Greatest Increase: {row[0]} ({row[1]})")
+            txtfile.write(f"Greatest Increase: {row[0]} ({row[1]})")
+            txtfile.write("\n")
         if greatest_decrease in row:
-            print(f"Greatest Decrease: {row[0]} ({row[1]})")
+            txtfile.write(f"Greatest Decrease: {row[0]} ({row[1]})")
+            txtfile.write("\n")

@@ -1,10 +1,7 @@
 # PyPoll Homework code
-#The total number of votes cast - complete with counter
-#A complete list of candidates who received votes - complete with if and append
-#The percentage of votes each candidate won
-#The total number of votes each candidate won
-#The winner of the election based on popular vote.
 
+from asyncore import write
+from gzip import WRITE
 import os
 import csv
 import math
@@ -40,19 +37,23 @@ with open(csvpath) as csvfile:
     #Creates a table by combining candidates, votes, and their percent total
     election_data = zip(candidates, candidate_votes, vote_percent)
     most_votes = max(candidate_votes)
+
+# Creating output file and writing information from election data analysis
+output_path = os.path.join("PyPoll", "analysis", "analysis.txt")
+
+with open(output_path, 'w', newline='') as txtfile:
     
-    print("Election Results")
-    print("--------------------------")
-    print(totalvotes)
-    print("--------------------------")
+    txtfile.write("Election Results \n")
+    txtfile.write("-------------------------- \n")
+    txtfile.write(str(totalvotes) + "\n")
+    txtfile.write("-------------------------- \n")
     for i in range(len(candidates)):
-        print(f"{candidates[i]}: {vote_percent[i]} ({candidate_votes[i]})")
-    print("--------------------------")
+        txtfile.write(f"{candidates[i]}: {vote_percent[i]} ({candidate_votes[i]})")
+        txtfile.write("\n")
+    txtfile.write("-------------------------- \n")
     for result in election_data:
         if most_votes in result:
-            print(f"Winner: {result[0]}")
-            break
-
-    
-    
+            txtfile.write(f"Winner: {result[0]}")
+            txtfile.write("\n")       
+    txtfile.write("-------------------------- \n")
     
